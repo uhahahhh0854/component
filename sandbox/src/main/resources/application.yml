@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: sandbox
+
+server:
+  servlet:
+    context-path: /sandbox
+
+  port: 8080

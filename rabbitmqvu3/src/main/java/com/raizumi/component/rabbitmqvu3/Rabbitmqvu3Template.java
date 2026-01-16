@@ -13,9 +13,9 @@ import org.springframework.util.Assert;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class JosteinRabbitmqTemplate extends org.springframework.amqp.rabbit.core.RabbitTemplate {
+public class Rabbitmqvu3Template extends org.springframework.amqp.rabbit.core.RabbitTemplate {
 
-    private final Logger log = LoggerFactory.getLogger(JosteinRabbitmqTemplate.class);
+    private final Logger log = LoggerFactory.getLogger(Rabbitmqvu3Template.class);
 
     private ContextUtil contextUtil;
 
@@ -31,20 +31,20 @@ public class JosteinRabbitmqTemplate extends org.springframework.amqp.rabbit.cor
         super.setConnectionFactory(connectionFactory);
     }
 
-    JosteinRabbitmqTemplate(){
+    Rabbitmqvu3Template(){
         super();
     }
 
-    JosteinRabbitmqTemplate(ConnectionFactory connectionFactory) {
+    Rabbitmqvu3Template(ConnectionFactory connectionFactory) {
         super(connectionFactory);
     }
 
-    JosteinRabbitmqTemplate(ContextUtil contextUtil) {
+    Rabbitmqvu3Template(ContextUtil contextUtil) {
         super();
         this.contextUtil = contextUtil;
     }
 
-    JosteinRabbitmqTemplate(ContextUtil contextUtil, ConnectionFactory connectionFactory) {
+    Rabbitmqvu3Template(ContextUtil contextUtil, ConnectionFactory connectionFactory) {
         super(connectionFactory);
         this.contextUtil = contextUtil;
         super.setConnectionFactory(connectionFactory);

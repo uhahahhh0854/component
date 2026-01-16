@@ -52,7 +52,7 @@ public class MqttAutoConfiguration {
                 prefix = "joinstec.mqtt",
                 name = {"host", "username", "password"}
         )
-        public JosteinMqttTemplate mqttTemplate(Box box) {
+        public Mqttvu3Template mqttTemplate(Box box) {
             return mqttAdminister.register(box);
         }
 

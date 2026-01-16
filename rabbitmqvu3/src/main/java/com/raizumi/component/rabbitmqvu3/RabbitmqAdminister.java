@@ -18,8 +18,8 @@ public class RabbitmqAdminister{
         this.contextUtil = contextUtil;
     }
 
-    public JosteinRabbitmqTemplate buildTemplate(Publisher publisher) {
-        JosteinRabbitmqTemplate template = new JosteinRabbitmqTemplate(contextUtil);
+    public Rabbitmqvu3Template buildTemplate(Publisher publisher) {
+        Rabbitmqvu3Template template = new Rabbitmqvu3Template(contextUtil);
 
         if (!(publisher.getConnectionFactory() instanceof CachingConnectionFactory)) {
             throw new IllegalArgumentException("ConnectionFactory must be CachingConnectionFactory to use publisherConfirmType/publisherReturns");

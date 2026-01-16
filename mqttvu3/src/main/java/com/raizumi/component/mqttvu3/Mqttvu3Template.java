@@ -29,8 +29,8 @@ import java.util.List;
 
 import static com.raizumi.component.mqttvu3.constants.ControlVar.*;
 
-public class JosteinMqttTemplate extends AbstractMqttAssembleAdapter implements ToSubscribe {
-    private static final Logger log = LoggerFactory.getLogger(JosteinMqttTemplate.class);
+public class Mqttvu3Template extends AbstractMqttAssembleAdapter implements ToSubscribe {
+    private static final Logger log = LoggerFactory.getLogger(Mqttvu3Template.class);
 
 
     public Box box;
@@ -41,7 +41,7 @@ public class JosteinMqttTemplate extends AbstractMqttAssembleAdapter implements 
 
     private volatile Boolean isCompleted = false;
 
-    public JosteinMqttTemplate(Box box, ContextUtil contextUtil) {
+    public Mqttvu3Template(Box box, ContextUtil contextUtil) {
         super(contextUtil.getBean(IntegrationFlowContext.class));
 
         this.box = box;

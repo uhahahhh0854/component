@@ -32,15 +32,15 @@ public class AfterRabbitAutoConfiguration {
     public static class AfterCreatorConfiguration {
         @Bean
         @ConditionalOnSingleCandidate(ConnectionFactory.class)
-        public JosteinRabbitmqTemplate josteinRabbitmqTemplate(RabbitTemplateConfigurer configurer,
-                                                              ConnectionFactory connectionFactory,
-                                                              ContextUtil contextUtil) {
+        public Rabbitmqvu3Template rabbitmqvu3Template(RabbitTemplateConfigurer configurer,
+                                                       ConnectionFactory connectionFactory,
+                                                       ContextUtil contextUtil) {
 
             if (configurer == null) {
                 throw new IllegalArgumentException("contextUtil is null");
             }
 
-            JosteinRabbitmqTemplate template = new JosteinRabbitmqTemplate(contextUtil,connectionFactory);
+            Rabbitmqvu3Template template = new Rabbitmqvu3Template(contextUtil,connectionFactory);
             configurer.configure(template, connectionFactory);
             return template;
         }

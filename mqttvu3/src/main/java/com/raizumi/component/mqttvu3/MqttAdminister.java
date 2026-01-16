@@ -11,8 +11,8 @@ public class MqttAdminister {
         this.contextUtil = contextUtil;
     }
 
-    public JosteinMqttTemplate register(Box box){
-        return new JosteinMqttTemplate(box, contextUtil);
+    public Mqttvu3Template register(Box box){
+        return new Mqttvu3Template(box, contextUtil);
     }
 
 }

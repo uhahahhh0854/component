@@ -28,9 +28,7 @@ public enum Headers{
     // Prevent replay attacks by verifying a unique, temporary nonce against a server-side cache.
     X_NONCE("X-Nonce"),
 
-    X_VERSION("X-Version"),
-
-    Y_PMATSEMIT("Y-Pmatsemit"),;
+    X_VERSION("X-Version");
 
     final String name;
 

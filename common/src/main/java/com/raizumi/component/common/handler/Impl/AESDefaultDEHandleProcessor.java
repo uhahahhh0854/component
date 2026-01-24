@@ -66,16 +66,16 @@ public class AESDefaultDEHandleProcessor implements DEHandleDescriptor {
                 throw new IllegalArgumentException("Illegally, decrypt data is too short");
             }
 
-            // 2. 提取IV（前16字节）
+            // 2. 提取IV（前x字节）
             byte[] iv = Arrays.copyOfRange(data, 0, ivLength);
             byte[] content = Arrays.copyOfRange(data, ivLength, data.length);
 
             // 3. 解密
             Cipher cipher = Cipher.getInstance(ALGORITHM.getAlgorithm());
             if (ALGORITHM == Gorithm.GCM) {
-                cipher.init(Cipher.ENCRYPT_MODE, SECRET_KEY, new GCMParameterSpec(128, iv));
+                cipher.init(Cipher.DECRYPT_MODE, SECRET_KEY, new GCMParameterSpec(ivLength, iv));
             } else {
-                cipher.init(Cipher.ENCRYPT_MODE, SECRET_KEY, new IvParameterSpec(iv));
+                cipher.init(Cipher.DECRYPT_MODE, SECRET_KEY, new IvParameterSpec(iv));
             }
             return cipher.doFinal(content);
         } catch (Exception e){
@@ -98,7 +98,7 @@ public class AESDefaultDEHandleProcessor implements DEHandleDescriptor {
             // 2. 初始化加密器
             Cipher cipher = Cipher.getInstance(ALGORITHM.getAlgorithm());
             if (ALGORITHM == Gorithm.GCM){
-                cipher.init(Cipher.ENCRYPT_MODE, SECRET_KEY, new GCMParameterSpec(128, iv));
+                cipher.init(Cipher.ENCRYPT_MODE, SECRET_KEY, new GCMParameterSpec(ivLength, iv));
             }else{
                 cipher.init(Cipher.ENCRYPT_MODE, SECRET_KEY, new IvParameterSpec(iv));
             }

@@ -1,7 +1,7 @@
 package com.raizumi.component.rabbitmqvu3;
 
 import com.raizumi.component.rabbitmqvu3.entity.SimpleMLC;
-import com.raizumi.component.common.tool.ContextUtil;
+import com.raizumi.component.common.utils.ContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.MessageListener;

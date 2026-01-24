@@ -1,5 +1,4 @@
-package com.raizumi.component.rabbitmqvu3;
-
+package com.raizumi.component.common.auto;
 
 import com.raizumi.component.common.utils.ContextUtil;
 import org.springframework.beans.factory.ObjectProvider;
@@ -9,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 @AutoConfiguration
-public class RabbitmqAutoConfiguration {
+public class ComponentAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(ContextUtil.class)
@@ -17,9 +16,4 @@ public class RabbitmqAutoConfiguration {
         return new ContextUtil(contextProvider.getIfAvailable());
     }
 
-    @Bean
-    @ConditionalOnMissingBean(RabbitmqAdminister.class)
-    public RabbitmqAdminister rabbitmqAdminister(ContextUtil contextUtil) {
-        return new RabbitmqAdminister(contextUtil);
-    }
 }

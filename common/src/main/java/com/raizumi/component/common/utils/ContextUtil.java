@@ -1,4 +1,4 @@
-package com.raizumi.component.common.tool;
+package com.raizumi.component.common.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class ContextUtil {
 
     public <T> boolean register(String beanName, Class<T> beanClass, T instance) {
         if (applicationContext.containsBean(beanName)) {
-            log.warn("Bean [{}] 已存在，注册跳过。", beanName);
+            log.warn("Bean [{}] already registered, skip operation.", beanName);
             return false;
         }
         try {
@@ -32,34 +32,34 @@ public class ContextUtil {
                         (DefaultListableBeanFactory) applicationContext.getAutowireCapableBeanFactory();
                 beanFactory.registerSingleton(beanName, instance);
             }
-            log.info("Bean [{}] 注册成功，类型 [{}]", beanName, beanClass.getName());
+            log.info("Bean [{}] register successfully, type: [{}]", beanName, beanClass.getName());
             return true;
         } catch (Exception e) {
-            log.error("Bean [{}] 注册失败: {}", beanName, e.getMessage(), e);
+            log.error("Bean [{}] register fail: {}", beanName, e.getMessage(), e);
             return false;
         }
     }
 
     public boolean unregister(String beanName) {
         if (!applicationContext.containsBean(beanName)) {
-            log.warn("Bean [{}] 不存在，注销跳过。", beanName);
+            log.warn("Bean [{}] is not exist，remove skipping.", beanName);
             return false;
         }
         try {
             DefaultListableBeanFactory beanFactory =
                     (DefaultListableBeanFactory) applicationContext.getAutowireCapableBeanFactory();
             beanFactory.removeBeanDefinition(beanName);
-            log.info("Bean [{}] 注销成功", beanName);
+            log.info("Bean [{}] remove successfully.", beanName);
             return true;
         } catch (Exception e) {
-            log.error("Bean [{}] 注销失败: {}", beanName, e.getMessage(), e);
+            log.error("Bean [{}] remove fail: {}", beanName, e.getMessage(), e);
             return false;
         }
     }
 
     public <T> Optional<T> getBean(String beanName, Class<T> clazz) {
         if (!applicationContext.containsBean(beanName)) {
-            log.warn("Bean [{}] 不存在", beanName);
+            log.warn("Bean [{}] is not exist.", beanName);
             return Optional.empty();
         }
         return Optional.of(applicationContext.getBean(beanName, clazz));

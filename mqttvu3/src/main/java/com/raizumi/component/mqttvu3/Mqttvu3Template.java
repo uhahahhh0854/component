@@ -13,8 +13,8 @@ import com.raizumi.component.mqttvu3.handler.TransformingDescriptor;
 import com.raizumi.component.mqttvu3.processor.Sender;
 import com.raizumi.component.mqttvu3.processor.ToSubscribe;
 import com.raizumi.component.mqttvu3.processor.meta.AbstractMqttAssembleAdapter;
-import com.raizumi.component.common.tool.ContextUtil;
-import com.raizumi.component.common.tool.ReflectionUtil;
+import com.raizumi.component.common.utils.ContextUtil;
+import com.raizumi.component.common.utils.ReflectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.integration.channel.DirectChannel;
@@ -138,9 +138,12 @@ public class Mqttvu3Template extends AbstractMqttAssembleAdapter implements ToSu
                 flowContext = contextUtil.getBean(IntegrationFlowContext.class);
                 flowContext.remove(MQTT_ERROR_FLOW);
             }
-            contextUtil.unregister(MQTT_SENDER);
-            contextUtil.unregister(MQTT_OUTBOUND_CHANNEL);
-            contextUtil.unregister(MQTT_ERROR_CHANNEL);
+
+            if (!contextUtil.unregister(MQTT_SENDER)
+                    || !contextUtil.unregister(MQTT_OUTBOUND_CHANNEL)
+                    || !contextUtil.unregister(MQTT_ERROR_CHANNEL)){
+                throw new RuntimeException();
+            }
         } catch (Exception e) {
             log.error("[{}]: unregistration failure{}", ControlVar.MQTT + box.getClientId(), e.toString());
         }

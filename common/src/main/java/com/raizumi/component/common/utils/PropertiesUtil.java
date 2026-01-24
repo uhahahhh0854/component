@@ -1,4 +1,4 @@
-package com.raizumi.component.common.tool;
+package com.raizumi.component.common.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;

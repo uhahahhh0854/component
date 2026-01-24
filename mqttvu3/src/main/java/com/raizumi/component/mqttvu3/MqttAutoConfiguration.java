@@ -1,7 +1,7 @@
 package com.raizumi.component.mqttvu3;
 
 import com.raizumi.component.mqttvu3.entity.Box;
-import com.raizumi.component.common.tool.ContextUtil;
+import com.raizumi.component.common.utils.ContextUtil;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;

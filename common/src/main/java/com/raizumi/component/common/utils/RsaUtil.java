@@ -1,4 +1,4 @@
-package com.raizumi.component.common.tool;
+package com.raizumi.component.common.utils;
 
 import javax.crypto.Cipher;
 import java.security.*;

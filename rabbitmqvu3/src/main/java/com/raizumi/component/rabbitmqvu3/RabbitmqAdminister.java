@@ -2,7 +2,7 @@ package com.raizumi.component.rabbitmqvu3;
 
 import com.raizumi.component.rabbitmqvu3.entity.Publisher;
 import com.raizumi.component.rabbitmqvu3.handler.Impl.DefaultConvertingProcessor;
-import com.raizumi.component.common.tool.ContextUtil;
+import com.raizumi.component.common.utils.ContextUtil;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.amqp.support.converter.SimpleMessageConverter;

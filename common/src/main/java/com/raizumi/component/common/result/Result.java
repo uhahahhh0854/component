@@ -35,24 +35,6 @@ public class Result <T> implements Serializable {
         this.data = data;
     }
 
-    public static Result<?> success(){
-        return new Result<>();
-    }
-
-    public static Result<?> success(Object data){
-        return new Result<>(data);
-    }
-
-    public static Result<?> failure(){
-        return new Result<>(Code.INTERNAL_ERROR);
-    }
-
-    public static Result<?> failure(Object data){
-        return new Result<>(Code.INTERNAL_ERROR, data);
-    }
-
-
-
 
     public Integer getStatus() {
         return status;

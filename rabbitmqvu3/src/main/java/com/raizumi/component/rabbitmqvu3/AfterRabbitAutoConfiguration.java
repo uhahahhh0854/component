@@ -1,7 +1,7 @@
 package com.raizumi.component.rabbitmqvu3;
 
 
-import com.raizumi.component.common.tool.ContextUtil;
+import com.raizumi.component.common.utils.ContextUtil;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;

@@ -1,6 +1,6 @@
 package com.raizumi.component.common.utils;
 
-import com.raizumi.component.common.enums.Headers;
+import com.raizumi.component.common.enums.HmacHeaders;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 
 import javax.crypto.Mac;
@@ -131,7 +131,7 @@ public class HmacUtil {
         result.append(LS);
 
 
-        List<String> nonces = HttpUtil.getHeaders(request, Headers.X_NONCE.name());
+        List<String> nonces = HttpUtil.getHeaders(request, HmacHeaders.X_NONCE.name());
 
         if (nonces.size() == 1) {
             result.append(nonces.get(0));
@@ -141,7 +141,7 @@ public class HmacUtil {
 
         result.append(LS);
 
-        List<String> timestamps = HttpUtil.getHeaders(request, Headers.X_TIMESTAMP.name());
+        List<String> timestamps = HttpUtil.getHeaders(request, HmacHeaders.X_TIMESTAMP.name());
         if (timestamps.size() == 1) {
             result.append(new StringBuilder(timestamps.get(0)).reverse());
         }else{

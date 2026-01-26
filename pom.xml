@@ -123,6 +123,24 @@
             </dependency>
 
             <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-crypto</artifactId>
+                <version>5.7.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>0.11.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.web3j</groupId>
+                <artifactId>core</artifactId>
+                <version>4.9.4</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.raizumi.component</groupId>
                 <artifactId>common</artifactId>
                 <version>0.0.1</version>

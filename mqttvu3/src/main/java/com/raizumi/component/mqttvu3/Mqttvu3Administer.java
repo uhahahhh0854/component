@@ -3,11 +3,11 @@ package com.raizumi.component.mqttvu3;
 import com.raizumi.component.mqttvu3.entity.Box;
 import com.raizumi.component.common.utils.ContextUtil;
 
-public class MqttAdminister {
+public class Mqttvu3Administer {
 
     private final ContextUtil contextUtil;
 
-    MqttAdminister(ContextUtil contextUtil){
+    Mqttvu3Administer(ContextUtil contextUtil){
         this.contextUtil = contextUtil;
     }
 

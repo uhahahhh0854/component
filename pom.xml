@@ -27,6 +27,7 @@
         <module>rabbitmqvu3</module>
         <module>common</module>
         <module>sandbox</module>
+        <module>permission</module>
     </modules>
 
     <dependencies>
@@ -87,7 +88,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-amqp</artifactId>
-                <version>3.5.4</version>
+                <version>2.7.18</version>
             </dependency>
 
             <dependency>
@@ -126,6 +127,12 @@
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-crypto</artifactId>
                 <version>5.7.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>2.7.18</version>
             </dependency>
 
             <dependency>

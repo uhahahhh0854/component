@@ -5,8 +5,15 @@ import java.util.UUID;
 
 public class UuidUtil {
 
-    public static String uuid(){
+    public static String s_uuid(){
         return UUID.randomUUID().toString().replace("-", "");
+    }
+
+    public static Long l_uuid(){
+        long millis = System.currentTimeMillis();
+        String timestamp = String.valueOf(millis);
+
+        return new Long(new StringBuilder(timestamp).reverse().toString());
     }
 
     public static <T> Integer hash(T t) {

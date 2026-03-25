@@ -18,12 +18,12 @@ import org.springframework.messaging.MessageChannel;
 
 @AutoConfiguration
 @Import({
-        MqttAutoConfiguration.DefaultAutoConfiguration.class,
-        MqttAutoConfiguration.BoxAutoConfiguration.class
+        Mqttvu3AutoConfiguration.DefaultAutoConfiguration.class,
+        Mqttvu3AutoConfiguration.BoxAutoConfiguration.class
 })
-public class MqttAutoConfiguration {
+public class Mqttvu3AutoConfiguration {
 
-    private static MqttAdminister mqttAdminister;
+    private static Mqttvu3Administer mqttvu3Administer;
 
     @AutoConfiguration
     public static class DefaultAutoConfiguration {
@@ -35,10 +35,10 @@ public class MqttAutoConfiguration {
         }
 
         @Bean
-        @ConditionalOnMissingBean(MqttAdminister.class) // 确保唯一
-        public MqttAdminister mqttAdminister(ContextUtil contextUtil) {
-            mqttAdminister = new MqttAdminister(contextUtil);
-            return mqttAdminister;
+        @ConditionalOnMissingBean(Mqttvu3Administer.class) // 确保唯一
+        public Mqttvu3Administer mqttAdminister(ContextUtil contextUtil) {
+            mqttvu3Administer = new Mqttvu3Administer(contextUtil);
+            return mqttvu3Administer;
         }
     }
 
@@ -47,13 +47,13 @@ public class MqttAutoConfiguration {
     public static class BoxAutoConfiguration {
 
         @Bean
-        @ConditionalOnBean(MqttAdminister.class)
+        @ConditionalOnBean(Mqttvu3Administer.class)
         @ConditionalOnProperty(
-                prefix = "joinstec.mqtt",
+                prefix = "utec.mqtt",
                 name = {"host", "username", "password"}
         )
         public Mqttvu3Template mqttTemplate(Box box) {
-            return mqttAdminister.register(box);
+            return mqttvu3Administer.register(box);
         }
 
         @Bean

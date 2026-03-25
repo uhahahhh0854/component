@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.raizumi.component.mqttvu3.MqttAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.raizumi.component.mqttvu3.Mqttvu3AutoConfiguration

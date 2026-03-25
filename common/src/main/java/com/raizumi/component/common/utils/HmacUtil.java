@@ -131,10 +131,10 @@ public class HmacUtil {
         result.append(LS);
 
 
-        List<String> nonces = HttpUtil.getHeaders(request, HmacHeaders.X_NONCE.name());
+        List<String> nonceList = HttpUtil.getHeaders(request, HmacHeaders.X_NONCE.name());
 
-        if (nonces.size() == 1) {
-            result.append(nonces.get(0));
+        if (nonceList.size() == 1) {
+            result.append(nonceList.get(0));
         }else{
             throw new IllegalArgumentException("Request does not contain exactly one nonce");
         }

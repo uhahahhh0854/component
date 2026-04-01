@@ -12,15 +12,15 @@ import java.util.Objects;
 public class PropertiesUtil {
     private static final Logger log = LoggerFactory.getLogger(PropertiesUtil.class);
 
-    public static Map<String, Object> getProperties(String key, String target, String regex) {
+    public static Map<String, Object> getProperties(String path, String target, String regex) {
         YamlMapFactoryBean bean = new YamlMapFactoryBean();
-        bean.setResources(new ClassPathResource("config/" + key));
+        bean.setResources(new ClassPathResource(path));
         Map<String, Object> maps = bean.getObject();
         if (maps == null) {
-            log.error("【配置文件{}不存在】 ", key);
+            log.error("Property file {} isn't exist.", path);
             return null;
         }
-        /*  .符号需要转义*/
+        //  .符号需要转义
         if (Objects.equals(regex, ".")) {
             regex = "\\.";
         }

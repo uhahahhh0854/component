@@ -37,7 +37,7 @@ public class AfterRabbitAutoConfiguration {
                                                        ContextUtil contextUtil) {
 
             if (configurer == null) {
-                throw new IllegalArgumentException("contextUtil is null");
+                throw new IllegalArgumentException("configurer is null");
             }
 
             Rabbitmqvu3Template template = new Rabbitmqvu3Template(contextUtil,connectionFactory);

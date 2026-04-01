@@ -1,7 +1,7 @@
 package com.raizumi.component.mqttvu3.pojo;
 
 import com.raizumi.component.mqttvu3.exception.PahoException;
-import org.springframework.lang.NonNullApi;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
@@ -24,11 +24,13 @@ public class ErrorMessage <T> implements Message<T>, Serializable {
         this.headers = headers;
     }
 
+    @NotNull
     @Override
     public T getPayload() {
         return this.payload;
     }
 
+    @NotNull
     @Override
     public MessageHeaders getHeaders() {
         return this.headers;

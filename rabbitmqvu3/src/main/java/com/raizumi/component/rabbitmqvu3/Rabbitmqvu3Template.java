@@ -103,6 +103,7 @@ public class Rabbitmqvu3Template extends org.springframework.amqp.rabbit.core.Ra
 
         SimpleMessageListenerContainer simpleMessageListenerContainer = simpleMLC.simpleMessageListenerContainer();
         simpleMessageListenerContainer.setConnectionFactory(connectionFactory);
+        simpleMessageListenerContainer.setMissingQueuesFatal(false);
         simpleMessageListenerContainer.start();
 
         String key = getUUID() + "-simpleMessageListenerContainer" + subscribers.size() + System.currentTimeMillis();

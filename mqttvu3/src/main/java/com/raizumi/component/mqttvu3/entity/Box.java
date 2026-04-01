@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @ConfigurationProperties(
-        prefix = "joinstec.mqtt"
+        prefix = "utec.mqtt"
 )
 public class Box  extends Disposer implements Serializable, Connection {
 
@@ -149,5 +149,34 @@ public class Box  extends Disposer implements Serializable, Connection {
         this.setAlgorithm(disposer.getAlgorithm());
         this.setMode(disposer.getMode());
         this.setEncoding(disposer.getEncoding());
+    }
+
+    public String toString(){
+        return "host: " +
+                host +
+                ", clientId: " +
+                clientId +
+                ", username: " +
+                username +
+                ", password: " +
+                password +
+                ", qos: " +
+                qos +
+                ", connectionTimeOut: " +
+                connectionTimeOut +
+                ", keepAlive: " +
+                keepAlive +
+                ", cleanSession: " +
+                cleanSession +
+                ", automaticReconnect: " +
+                automaticReconnect +
+                ", errorMessageHandler: " +
+                errorMessageHandler +
+                ", sub: " +
+                sub +
+                ", ssl: " +
+                ssl +
+                ", disposer: " +
+                super.toString();
     }
 }

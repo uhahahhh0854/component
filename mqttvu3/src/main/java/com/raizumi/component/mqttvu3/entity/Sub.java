@@ -32,6 +32,10 @@ public class Sub extends Disposer implements Serializable, Connection {
 
     private Integer qos = 2;
 
+    private Boolean isBranch = false;
+
+    private Integer batchSize = 10;
+
     /*  业务处理器*/
     private MessageHandler messageHandler;
 
@@ -207,5 +211,21 @@ public class Sub extends Disposer implements Serializable, Connection {
 
     public void setShared(boolean shared) {
         this.shared = shared;
+    }
+
+    public Boolean getBranch() {
+        return isBranch;
+    }
+
+    public void setBranch(Boolean branch) {
+        isBranch = branch;
+    }
+
+    public Integer getBatchSize() {
+        return batchSize;
+    }
+
+    public void setBatchSize(Integer batchSize) {
+        this.batchSize = batchSize;
     }
 }

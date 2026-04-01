@@ -171,4 +171,22 @@ public class Disposer implements Serializable {
     public void setCompressHandlerDescriptor(com.raizumi.component.common.handler.CompressHandlerDescriptor compressHandlerDescriptor) {
         this.compressHandlerDescriptor = compressHandlerDescriptor;
     }
+
+    public String toString(){
+        return super.toString() +
+                " deHandleDescriptor: " +
+                deHandleDescriptor +
+                ", secretKey: " +
+                secretKey +
+                ", algorithm: " +
+                algorithm +
+                ", mode: " +
+                mode +
+                ", encoding: " +
+                encoding +
+                ", compressHandlerDescriptor: " +
+                compressHandlerDescriptor +
+                ", messageAdviceCreator: " +
+                messageAdviceCreator;
+    }
 }

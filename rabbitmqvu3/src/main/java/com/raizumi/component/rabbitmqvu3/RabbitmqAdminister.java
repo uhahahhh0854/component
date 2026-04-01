@@ -4,6 +4,8 @@ import com.raizumi.component.rabbitmqvu3.entity.Publisher;
 import com.raizumi.component.rabbitmqvu3.handler.Impl.DefaultConvertingProcessor;
 import com.raizumi.component.common.utils.ContextUtil;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.amqp.support.converter.SimpleMessageConverter;
 
@@ -11,11 +13,20 @@ import java.util.Optional;
 
 import static com.raizumi.component.rabbitmqvu3.constants.ControlVar.MESSAGE_CONVERTER;
 
-public class RabbitmqAdminister{
+public class RabbitmqAdminister extends RabbitAdmin {
     private final ContextUtil contextUtil;
 
-    RabbitmqAdminister(ContextUtil contextUtil){
+    RabbitmqAdminister(ContextUtil contextUtil, ConnectionFactory connectionFactory) {
+        super(connectionFactory);
         this.contextUtil = contextUtil;
+    }
+
+    public Rabbitmqvu3Template buildTemplate(String beanName, Publisher publisher) {
+        Rabbitmqvu3Template rabbitmqvu3Template = this.buildTemplate(publisher);
+
+        contextUtil.register(beanName,Rabbitmqvu3Template.class,rabbitmqvu3Template);
+
+        return rabbitmqvu3Template;
     }
 
     public Rabbitmqvu3Template buildTemplate(Publisher publisher) {

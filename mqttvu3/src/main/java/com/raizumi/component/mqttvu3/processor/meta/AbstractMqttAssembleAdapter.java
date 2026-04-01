@@ -10,6 +10,7 @@ import com.raizumi.component.mqttvu3.handler.MessageAdviceCreator;
 import com.raizumi.component.mqttvu3.handler.TransformingDescriptor;
 import org.aopalliance.aop.Advice;
 import org.springframework.context.ApplicationContext;
+import org.springframework.integration.aggregator.MessageCountReleaseStrategy;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.PriorityChannel;
 import org.springframework.integration.channel.PublishSubscribeChannel;
@@ -25,6 +26,7 @@ import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
 import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
 import org.springframework.integration.mqtt.outbound.MqttPahoMessageHandler;
 import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
+import org.springframework.integration.mqtt.support.MqttHeaders;
 import org.springframework.integration.transformer.GenericTransformer;
 import org.springframework.integration.transformer.MessageTransformingHandler;
 import org.springframework.messaging.MessageChannel;
@@ -169,13 +171,31 @@ public abstract class AbstractMqttAssembleAdapter extends AbstractMqttConnection
 
         /*  解密*/
         /*  业务处理*/
-        StandardIntegrationFlow flow = IntegrationFlows.from(adapter)
+        StandardIntegrationFlow flow = sub.getBranch() ? IntegrationFlows.from(adapter)
                 /*  解密*/
                 .transform(transformer, endpointConfigurer)
                 /*  业务处理*/
                 .channel(inboundChannel)
                 .handle(handler)
-                .get();
+                .get() :
+
+                IntegrationFlows.from(adapter)
+                        /*  解密*/
+                .transform(transformer, endpointConfigurer)
+                        /*  业务处理*/
+                .aggregate(
+                            a -> a
+                                 .correlationStrategy(m -> m.getHeaders().get(MqttHeaders.RECEIVED_TOPIC))
+                                 .taskScheduler(this.adaptScheduler)
+                                 .releaseStrategy(new MessageCountReleaseStrategy(sub.getBatchSize()))
+                                 .groupTimeout(5000)
+                                 .sendPartialResultOnExpiry(true)
+                                 .expireGroupsUponCompletion(true)
+                )
+                .channel(inboundChannel)
+                .handle(handler)
+                .get()
+                ;
 
         flowContext.registration(flow)
                 .id(id)

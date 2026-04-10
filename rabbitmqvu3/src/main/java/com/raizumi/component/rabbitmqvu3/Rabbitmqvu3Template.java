@@ -89,16 +89,19 @@ public class Rabbitmqvu3Template extends org.springframework.amqp.rabbit.core.Ra
         return this.simpleSubscribe(super.getConnectionFactory(), simpleMLC);
     }
 
+    /**
+     * 连接前不测试连接状态，以免throw out退出
+     */
     public String simpleSubscribe(ConnectionFactory connectionFactory, SimpleMLC simpleMLC) {
 
         Assert.notNull(connectionFactory, "ConnectionFactory must not be null");
         Assert.notNull(simpleMLC, "SimpleMLC must not be null");
 
-        try{
+        /*try{
             connectionFactory.createConnection().close();
         }catch (Exception e){
             throw new IllegalArgumentException("Connection arguments is invalid");
-        }
+        }*/
 
 
         SimpleMessageListenerContainer simpleMessageListenerContainer = simpleMLC.simpleMessageListenerContainer();

@@ -20,9 +20,10 @@ public class Mqttvu3TemplateAutoConfiguration {
     @Bean
     @ConditionalOnProperty(
             prefix = "utec.mqtt",
-            name = {"host", "username", "password", "autoCreate"}
+            name = {"host", "username", "password", "auto-create"}
     )
     public Mqttvu3Template mqttvu3Template(Box box, Mqttvu3Administer administer) {
+        System.out.println(box.toString());
         return administer.register(box);
     }
 

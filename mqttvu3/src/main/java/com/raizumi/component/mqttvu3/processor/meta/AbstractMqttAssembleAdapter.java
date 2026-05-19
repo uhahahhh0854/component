@@ -6,8 +6,6 @@ import com.raizumi.component.mqttvu3.entity.Sub;
 import com.raizumi.component.mqttvu3.entity.SubInfo;
 import com.raizumi.component.mqttvu3.enums.Channel;
 import com.raizumi.component.mqttvu3.handler.Impl.DefaultMessageAdviceCreator;
-import com.raizumi.component.mqttvu3.handler.MessageAdviceCreator;
-import com.raizumi.component.mqttvu3.handler.TransformingDescriptor;
 import org.aopalliance.aop.Advice;
 import org.springframework.context.ApplicationContext;
 import org.springframework.integration.aggregator.MessageCountReleaseStrategy;
@@ -116,7 +114,11 @@ public abstract class AbstractMqttAssembleAdapter extends AbstractMqttConnection
         converter.setPayloadAsBytes(true);
         messageHandler.setConverter(converter);
 
-        /*  集成流会依据是否存在而选择引用或者新建
+        /*  暂不处理to many publishes的问题，同步发送解决qos=2的问题
+         */
+        messageHandler.setAsync(false);
+
+        /*   集成流会依据是否存在而选择引用或者新建
          *   在发送的时候mqttPahoMessageHandler默认讲payload转换成String，需要特殊配置：1.显式设定使用原始payload；2.使用特定Transform方法确定payload不会被转换
          *   这里使用的GenericTransformer
          * */

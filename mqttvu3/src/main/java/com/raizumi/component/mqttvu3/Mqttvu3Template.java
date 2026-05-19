@@ -59,60 +59,53 @@ public class Mqttvu3Template extends AbstractMqttAssembleAdapter implements ToSu
         this.register(box);
     }
 
-    private void beforeSend(String[] topics, int[] qos) {
+    private void beforeSend(String topic, int qos) {
         if (!isCompleted) {
             throw new RuntimeException("Sender is not ready");
         }
-        if (topics == null) {
-            throw new NullPointerException("Topics is null");
-        }
-        if (topics.length != qos.length) {
-            throw new IllegalArgumentException("Topics length is not equal to qos length");
+        if (topic == null) {
+            throw new IllegalArgumentException("Topics is null");
         }
 
     }
 
     public void send(Object payload) {
-        String[] topics = (box.getSub() != null && box.getSub().getTopics() != null && box.getSub().getTopics().length != 0) ?
-                box.getSub().getTopics() : new String[]{"default"};
-        int[] qos = new int[topics.length];
-        Arrays.fill(qos, box.getQos());
-        this.beforeSend(topics, qos);
-        sender.send(topics, qos, payload);
+
+        String[] topics = box.getSub() != null && box.getSub().getTopics() != null ? box.getSub().getTopics() : null;
+
+        int qos = box.getSub() != null && box.getSub().getQos() != null ? box.getSub().getQos() : 2;
+
+        assert topics != null;
+        for (String topic : topics) {
+            this.beforeSend(topic, qos);
+            sender.send(topic, qos, payload);
+        }
     }
 
     public void send(String topic, Object payload) {
-
-        String[] topics = new String[]{topic};
-        int[] qos = new int[]{box.getQos()};
-        beforeSend(topics, qos);
-        sender.send(topics, payload);
+        int qos = box.getSub() != null && box.getSub().getQos() != null ? box.getSub().getQos() : 2;
+        beforeSend(topic, qos);
+        sender.send(topic, payload);
     }
 
     public void send(String topic, int qos, Object payload) {
-        String[] topics = new String[]{topic};
-        int[] qos_s = new int[]{qos};
-        beforeSend(topics, qos_s);
-        sender.send(topics, qos, payload);
+        beforeSend(topic, qos);
+        sender.send(topic, qos, payload);
     }
 
     public void send(String[] topics, Object payload) {
-        int[] qos = new int[topics.length];
-        Arrays.fill(qos, box.getQos());
-        this.beforeSend(topics, qos);
-        sender.send(topics, payload);
+        int qos = box.getSub() != null && box.getSub().getQos() != null ? box.getSub().getQos() : 2;
+        for (String topic : topics) {
+            this.beforeSend(topic, qos);
+            sender.send(topic, payload);
+        }
     }
 
     public void send(String[] topics, int qos, Object payload) {
-        int[] qos_s = new int[topics.length];
-        Arrays.fill(qos_s, box.getQos());
-        beforeSend(topics, qos_s);
-        sender.send(topics, qos, payload);
-    }
-
-    public void send(String[] topics, int[] qos, Object payload) {
-        beforeSend(topics, qos);
-        sender.send(topics, qos, payload);
+        for (String topic : topics) {
+            this.beforeSend(topic, qos);
+            sender.send(topic, payload);
+        }
     }
 
 
@@ -169,8 +162,11 @@ public class Mqttvu3Template extends AbstractMqttAssembleAdapter implements ToSu
                 throw new RuntimeException("[MqttTemplate]: Some exception happened when registering error channel]");
             }
 
-            super.createOutFlow(mqttClientFactory(box), box,
-                    MQTT_OUTBOUND_FLOW, outboundChannel, errorChannel);
+            super.createOutFlow(mqttClientFactory(box),
+                    box,
+                    MQTT_OUTBOUND_FLOW,
+                    outboundChannel,
+                    errorChannel);
 
             /*  默认主题*/
             if (box.getSub() != null) {
@@ -344,9 +340,7 @@ public class Mqttvu3Template extends AbstractMqttAssembleAdapter implements ToSu
                 DirectChannel inBoundChannel = new DirectChannel();
                 contextUtil.register(MQTT_INBOUND_CHANNEL + timestamp, DirectChannel.class, inBoundChannel);
 
-                super.createInFlow(mqttClientFactory(
-                        sub.getUsername(), sub.getPassword(), sub.getConnectionTimeOut(), sub.getCleanSession(), sub.getKeepAlive(), sub.getAutomaticReconnect(), sub.getSsl(), sub.getHost()
-                ), id, sub, inBoundChannel, this.createChannel(sub, timestamp));
+                super.createInFlow(mqttClientFactory(sub), id, sub, inBoundChannel, this.createChannel(sub, timestamp));
 
                 return id;
             }

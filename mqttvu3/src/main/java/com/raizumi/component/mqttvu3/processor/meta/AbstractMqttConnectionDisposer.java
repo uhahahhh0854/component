@@ -2,6 +2,7 @@ package com.raizumi.component.mqttvu3.processor.meta;
 
 import com.raizumi.component.mqttvu3.entity.Box;
 import com.raizumi.component.mqttvu3.entity.Ssl;
+import com.raizumi.component.mqttvu3.entity.Sub;
 import com.raizumi.component.mqttvu3.processor.LoadingTLS;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory;
@@ -18,13 +19,32 @@ import java.security.SecureRandom;
 public abstract class AbstractMqttConnectionDisposer implements LoadingTLS {
 
     public MqttPahoClientFactory mqttClientFactory(Box box) throws Exception {
-        return this.mqttClientFactory(box.getUsername(), box.getPassword(),
-                box.getConnectionTimeOut(), box.getCleanSession(), box.getKeepAlive(), box.getAutomaticReconnect(),
-                box.getSsl(), box.getHost());
+        return this.mqttClientFactory(box.getUsername(),
+                box.getPassword(),
+                box.getConnectionTimeOut(),
+                box.getCleanSession(),
+                box.getKeepAlive(),
+                box.getAutomaticReconnect(),
+                box.getSsl(),
+                box.getHost());
+    }
+
+    public MqttPahoClientFactory mqttClientFactory(Sub sub) throws Exception {
+        return this.mqttClientFactory(sub.getUsername(),
+                sub.getPassword(),
+                sub.getConnectionTimeOut(),
+                sub.getCleanSession(),
+                sub.getKeepAlive(),
+                sub.getAutomaticReconnect(),
+                sub.getSsl(),
+                sub.getHost());
     }
 
     public MqttPahoClientFactory mqttClientFactory(String username, String password,
-                                                   Integer connectionTimeOut, Boolean isCleanSession, Integer keepAlive, Boolean automaticReconnect,
+                                                   Integer connectionTimeOut,
+                                                   Boolean isCleanSession,
+                                                   Integer keepAlive,
+                                                   Boolean automaticReconnect,
                                                    Ssl ssl,
                                                    String... host) throws Exception{
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();

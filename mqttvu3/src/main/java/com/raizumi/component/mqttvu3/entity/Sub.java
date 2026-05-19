@@ -70,9 +70,6 @@ public class Sub extends Disposer implements Serializable, Connection {
 
     public String valid(){
         StringBuilder sb = new StringBuilder();
-        if (this.topics == null || this.topics.length == 0){
-            sb.append("topics can't be empty;");
-        }
 
         return  sb.length() == 0? null : sb.toString();
     }

@@ -1,12 +1,15 @@
 package com.raizumi.component.common.handler.Impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.raizumi.component.common.enums.Mode;
 import com.raizumi.component.common.handler.meta.AbstractSEHandleProcessor;
 
 import java.nio.charset.Charset;
 
 public class DefaultSEHandleProcessor extends AbstractSEHandleProcessor {
+
+    private static final Gson gson = new Gson();
 
     public DefaultSEHandleProcessor() {
         super();
@@ -19,17 +22,17 @@ public class DefaultSEHandleProcessor extends AbstractSEHandleProcessor {
     @Override
     public <T> byte[] serialize(T payload, Mode mode)  {
         try{
-            if (mode == Mode.JSON){
-                return new ObjectMapper().writeValueAsString(payload).getBytes(encoding);
+            if (mode == Mode.JSON || mode == Mode.JAVA_JSON){
+                return gson.toJson(payload).getBytes(encoding);
             }
             if (mode == Mode.BYTES){
                 return (byte[]) payload;
             }
             if (mode == Mode.PLAINTEXT){
-                return new ObjectMapper().writeValueAsString(payload).getBytes(encoding);
+                return String.valueOf(payload).getBytes(encoding);
             }
 
-            return new ObjectMapper().writeValueAsBytes(payload);
+            return gson.toJson(payload).getBytes(encoding);
         }catch (Exception e){
             throw new RuntimeException("Serialize exception in " + e.getMessage());
         }
@@ -44,8 +47,8 @@ public class DefaultSEHandleProcessor extends AbstractSEHandleProcessor {
         }
 
         try{
-            if (mode == Mode.JSON){
-                return new ObjectMapper().readValue(payload, clazz);
+            if (mode == Mode.JSON || mode == Mode.JAVA_JSON){
+                return gson.fromJson(new String(payload, encoding), clazz);
             }
             if (mode == Mode.PLAINTEXT){
                 return new String(payload, encoding);

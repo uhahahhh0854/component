@@ -72,7 +72,7 @@ public class Disposer implements Serializable {
 
     private SEHandleDescriptor seHandleDescriptor;
     //  订阅返回的类型
-    private Mode mode = Mode.PLAINTEXT;
+    private Mode mode = Mode.JSON;
 
     private Charset encoding = StandardCharsets.UTF_8;
 

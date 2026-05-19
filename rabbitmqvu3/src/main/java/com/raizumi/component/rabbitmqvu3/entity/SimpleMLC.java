@@ -6,6 +6,7 @@ import org.springframework.amqp.core.BatchMessageListener;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.listener.ConditionalRejectingErrorHandler;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.amqp.rabbit.listener.api.ChannelAwareBatchMessageListener;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import java.util.Arrays;
@@ -74,7 +75,7 @@ public class SimpleMLC extends BaseMLC {
             container.setQueues(getQueues());
         }
         if (getMessageListener() != null) {
-            if (isConsumerBatchEnabled() && !(getMessageListener() instanceof BatchMessageListener)) {
+            if (!(isConsumerBatchEnabled() && (getMessageListener() instanceof BatchMessageListener || getMessageListener() instanceof ChannelAwareBatchMessageListener))) {
                 throw new IllegalStateException("Consumer batch listener is required for SimpleMLC if batch enabled.");
             }
             container.setMessageListener(getMessageListener());

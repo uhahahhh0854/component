@@ -1,2 +1,2 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.raizumi.component.common.auto.ComponentAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.hanamizuki.component.common.auto.ComponentAutoConfiguration
 

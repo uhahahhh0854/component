@@ -1,4 +1,4 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.raizumi.component.rabbitmqvu3.AfterRabbitAutoConfiguration,\
-  com.raizumi.component.rabbitmqvu3.BeforeRabbitAutoConfiguration,\
-  com.raizumi.component.rabbitmqvu3.RabbitmqAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.hanamizuki.component.rabbitmqvu3.AfterRabbitAutoConfiguration,\
+  com.hanamizuki.component.rabbitmqvu3.BeforeRabbitAutoConfiguration,\
+  com.hanamizuki.component.rabbitmqvu3.RabbitmqAutoConfiguration
 

@@ -9,7 +9,7 @@
         <version>2.7.18</version>
     </parent>
 
-    <groupId>com.raizumi.component</groupId>
+    <groupId>com.hanamizuki.component</groupId>
     <artifactId>component</artifactId>
     <version>0.0.1</version>
     <name>component</name>
@@ -148,13 +148,13 @@
             </dependency>
 
             <dependency>
-                <groupId>com.raizumi.component</groupId>
+                <groupId>com.hanamizuki.component</groupId>
                 <artifactId>common</artifactId>
                 <version>0.0.1</version>
             </dependency>
 
             <dependency>
-                <groupId>com.raizumi.component</groupId>
+                <groupId>com.hanamizuki.component</groupId>
                 <artifactId>mqttvu3</artifactId>
                 <version>0.0.1</version>
             </dependency>

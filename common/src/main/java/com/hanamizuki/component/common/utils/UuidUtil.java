@@ -1,0 +1,30 @@
+package com.hanamizuki.component.common.utils;
+
+
+import java.util.UUID;
+
+public class UuidUtil {
+
+    public static String s_uuid(){
+        return UUID.randomUUID().toString().replace("-", "");
+    }
+
+    public static Long l_uuid(){
+        long millis = System.currentTimeMillis();
+        String timestamp = String.valueOf(millis);
+
+        return new Long(new StringBuilder(timestamp).reverse().toString());
+    }
+
+    public static <T> Integer hash(T t) {
+        int hashCode = (UUID.randomUUID().toString().replace("-", "") + t.toString()).hashCode();
+        return hashCode < 0 ? -hashCode : hashCode;
+    }
+
+    public static String uuid(char prefix){
+        long millis = System.currentTimeMillis();
+        String timestamp = String.valueOf(millis);
+
+        return prefix + new StringBuilder(timestamp).reverse().toString();
+    }
+}

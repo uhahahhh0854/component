@@ -126,16 +126,16 @@ public abstract class AbstractConvertingProcessor extends AllowedListDeserializi
 
     private Object inTransform(@NonNull byte[] resource, @NonNull Mode mode) {
 
-        checkAllowedList(clazz);
+        //checkAllowedList(clazz);
 
         return seHandleDescriptor.deserialize(deHandleDescriptor.decrypt(resource),clazz, mode);
     }
 
     private byte[] outTransform(@NonNull Object in, @NonNull Mode mode) {
 
-        if (mode == Mode.JAVA_JSON){
+        /*if (mode == Mode.JAVA_JSON){
             checkAllowedList(in.getClass());
-        }
+        }*/
 
         return deHandleDescriptor.encrypt(seHandleDescriptor.serialize(in,mode));
     }
@@ -220,9 +220,9 @@ public abstract class AbstractConvertingProcessor extends AllowedListDeserializi
             mode = Mode.BYTES;
         }else if (object instanceof String) {
             mode = Mode.PLAINTEXT;
-        }else if (object instanceof Serializable) {
+        }/*else if (object instanceof Serializable) {
             mode = Mode.JAVA_JSON;
-        }else{
+        }*/else{
             mode = Mode.JSON;
         }
 

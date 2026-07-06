@@ -21,7 +21,7 @@ public class DefaultSEHandleProcessor extends AbstractSEHandleProcessor {
     @Override
     public <T> byte[] serialize(T payload, Mode mode)  {
         try{
-            if (mode == Mode.JSON || mode == Mode.JAVA_JSON){
+            if (mode == Mode.JSON /*|| mode == Mode.JAVA_JSON*/){
                 return gson.toJson(payload).getBytes(encoding);
             }
             if (mode == Mode.BYTES){
@@ -46,7 +46,7 @@ public class DefaultSEHandleProcessor extends AbstractSEHandleProcessor {
         }
 
         try{
-            if (mode == Mode.JSON || mode == Mode.JAVA_JSON){
+            if (mode == Mode.JSON /*|| mode == Mode.JAVA_JSON*/){
                 return gson.fromJson(new String(payload, encoding), clazz);
             }
             if (mode == Mode.PLAINTEXT){

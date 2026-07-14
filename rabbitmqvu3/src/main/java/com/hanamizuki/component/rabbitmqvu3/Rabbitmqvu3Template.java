@@ -4,6 +4,7 @@ import com.hanamizuki.component.rabbitmqvu3.entity.SimpleMLC;
 import com.hanamizuki.component.common.utils.ContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -107,6 +108,7 @@ public class Rabbitmqvu3Template extends org.springframework.amqp.rabbit.core.Ra
         SimpleMessageListenerContainer simpleMessageListenerContainer = simpleMLC.simpleMessageListenerContainer();
         simpleMessageListenerContainer.setConnectionFactory(connectionFactory);
         simpleMessageListenerContainer.setMissingQueuesFatal(false);
+        simpleMessageListenerContainer.setAcknowledgeMode(simpleMLC.getAcknowledgeMode());
         simpleMessageListenerContainer.start();
 
         String key = getUUID() + "-simpleMessageListenerContainer" + subscribers.size() + System.currentTimeMillis();
